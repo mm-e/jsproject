@@ -5,6 +5,29 @@ function identifyUser() { //Funcion sin parametros
 
 identifyUser();
 
+const playingCharachters = [
+    {name: "Purply", personality: "Laidback", superpower: "Chills the unchillable"},
+    {name: "Oxno", personality: "Godlike", superpower: "All powerful"},
+    {name: "Wolf", personality: "Cunning", superpower: "Knows the future"},
+    {name: "Dodo", personality: "Outdoorsy", superpower: "Carefree"}
+];
+
+
+const introducePlayingCharachters = playingCharachters.map((el) => el.name)
+
+alert(`Meet the characters in our game. You will choose on to play with. Our carachters are ${introducePlayingCharachters}`)
+
+let userPlayingCharachter = prompt("Who do you want to play with today?")
+
+let selectionInArray = playingCharachters.some((el) => el.name == userPlayingCharachter);
+
+if (selectionInArray != true){
+    alert ("Playing Charachter doesn't exist")
+}
+else{
+    alert("Awesome!")
+}
+
 let portmanteau = prompt ("Do you know what a PORTMANTEAU is? Please type Y or N");
 
 if (portmanteau == "Y"){
@@ -33,6 +56,19 @@ function userPortmanteau(userFirstWord, userCharachter) {
     alert(`OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${charachter} charachters of that word. Excellent choice!`);
    }
 let firstWord = prompt("Let's start building this PORTMANTEAU. What word would you like to use for the first part of this PORTMANTEAU?");
-let charachter = prompt("Nice word! Now, how many charchters would you like the two words in your PORMTANTEAU to share?")
+let charachter = prompt("Nice word! Now, how many charchters would you like the two words in your PORMTANTEAU to share?");
    
 userPortmanteau (firstWord, charachter);
+
+
+
+
+/*
+Estructura HTML del proyecto. 
+Variables de JS necesarias. 
+Funciones esenciales del proceso a simular.
+Objetos de JS
+Arrays
+Métodos de búsqueda y filtrado sobre el Array
+
+*/
