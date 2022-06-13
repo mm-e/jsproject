@@ -13,10 +13,13 @@ const playingCharachters = [
 ];
 
 
+const introducePlayingCharachters = playingCharachters.map((el) => el.name)
+
+alert(`Meet the characters in our game. You will choose on to play with. Our carachters are ${introducePlayingCharachters}`)
+
 let userPlayingCharachter = prompt("Who do you want to play with today?")
 
-
-const selectionInArray = playingCharachters.some((el) => el.name == userPlayingCharachter);
+let selectionInArray = playingCharachters.some((el) => el.name == userPlayingCharachter);
 
 if (selectionInArray != true){
     alert ("Playing Charachter doesn't exist")
