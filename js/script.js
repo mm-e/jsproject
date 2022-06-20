@@ -1,34 +1,34 @@
 let userName = prompt("Hi! My name is PT. What's your name?");
 function identifyUser() { //Funcion sin parametros    
-    //alert(`Hi, ${userName}! Welcome!`);
+    // alert(`Hi, ${userName}! Welcome!`);
     document.getElementById('titulo').innerHTML="<h1>PORTMANTEAU Generator</h1>"+`<h3>Hi, ${userName}! Welcome!</h3>`;
    }
 
 identifyUser();
-//Object Array definition
-const playingCharachters = [
+// Object Array definition
+const playingCharacters = [
     {name: "Purply", personality: "Laidback", superpower: "Chills the unchillable", photo:"../assets/****"}, //Need to add photo
     {name: "Oxno", personality: "Godlike", superpower: "All powerful", photo:"../assets/****"}, //Need to add photo
     {name: "Wolf", personality: "Cunning", superpower: "Knows the future", photo:"../assets/****"}, //Need to add photo
     {name: "Dodo", personality: "Outdoorsy", superpower: "Carefree", photo:"../assets/****"} //Need to add photo
 ];
 
-//Object Array selection
-const introducePlayingCharachters = playingCharachters.map((el) => el.name);
+// Object Array selection
+const introducePlayingCharacters = playingCharacters.map((el) => el.name);
 
-document.getElementById('contenido').innerHTML=`<h3>Meet the characters in our game. You will choose one to play with. Our carachters are ${introducePlayingCharachters}</h3>`;
+document.getElementById('contenido').innerHTML=`<h3>Meet the characters in our game. You will choose one to play with. Our carachters are ${introducePlayingCharacters}</h3>`;
 
-let userPlayingCharachter = prompt("Who do you want to play with today?");
+let userPlayingCharacter = prompt("Who do you want to play with today?");
 
-let selectionInArray = playingCharachters.some((el) => el.name == userPlayingCharachter);
+let selectionInArray = playingCharacters.some((el) => el.name == userPlayingCharacter);
 
 if (selectionInArray != true){
-    alert ("Playing Charachter doesn't exist");
+    alert ("Playing Character doesn't exist");
 }
 else{
     alert("Awesome!")
 }
-//Portmanteau introduction
+// Portmanteau introduction
 let portmanteau = prompt ("Do you know what a PORTMANTEAU is? Please type Y or N");
 
 if (portmanteau == "Y"){
@@ -36,9 +36,9 @@ if (portmanteau == "Y"){
 }
 
 else if (portmanteau == "N"){
-    //alert ("A PORTMANTEAU is a blend of words in which parts of multiple words are combined into a new word. Here we will blend the last letters of a word you will give us with the first same letters of a word we will find for you.");
+    // alert ("A PORTMANTEAU is a blend of words in which parts of multiple words are combined into a new word. Here we will blend the last letters of a word you will give us with the first same letters of a word we will find for you.");
     let portmanteauDefinition = "A PORTMANTEAU is a blend of words in which parts of multiple words are combined into a new word. Here we will blend the last letters of a word you will give us with the first same letters of a word we will find for you.";
-    document.getElementById('titulo').innerHTML= document.getElementById('titulo').innerHTML + `<p> ${portmanteauDefinition} </p>`;
+    document.getElementById('titulo').innerHTML= document.getElementById('titulo').innerHTML + `<p = "dictionaryResult"> ${portmanteauDefinition} </p>`;
 }
 
 else{
@@ -46,16 +46,30 @@ else{
 }
 
 
-//Countdown
+// Countdown
 for (let i=3;i>=0;i--){
     alert(`PORMANTEAU is live in ${i}!!`);
 }
 
-function userPortmanteau(userFirstWord, userCharachter) {
+function userPortmanteau(userFirstWord, userCharacter) {
     
-    alert(`OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${charachter} charachters of that word. Excellent choice!`);
-   }
+    // alert(`OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${character} characters of that word. Excellent choice!`);
+   document.getElementById('contenido').innerHTML= document.getElementById('contenido').innerHTML + `<p id= "builtPormanteau"> OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${userCharacter} characters of that word. Excellent choice! </p>`;
+}
+
+// Main
+// Events added
+
+document.getElementById('contenido').addEventListener("click", function(){
+    alert(`${userName} just clicked!`)
+})
+
+document.getElementById('seccionTercera').innerHTML="<h6>TO RESTART THE PORMANTEAU GENERATOR CLICK <b>\"HERE\"</b></h6>";
+document.getElementById('seccionTercera').addEventListener('click', function(){
+    document.location.reload(true);
+});
+
 let firstWord = prompt("Let's start building this PORTMANTEAU. What word would you like to use for the first part of this PORTMANTEAU?");
-let charachter = prompt("Nice word! Now, how many charchters would you like the two words in your PORMTANTEAU to share?");
+let character = prompt("Nice word! Now, how many charchters would you like the two words in your PORMTANTEAU to share?");
    
-userPortmanteau (firstWord, charachter);
+userPortmanteau (firstWord, character);
