@@ -1,8 +1,49 @@
-let userName = prompt("Hi! My name is PT. What's your name?");
+//functions
+
+
 function identifyUser() { //Funcion sin parametros    
     // alert(`Hi, ${userName}! Welcome!`);
     document.getElementById('titulo').innerHTML="<h1>PORTMANTEAU Generator</h1>"+`<h3>Hi, ${userName}! Welcome!</h3>`;
    }
+
+
+
+function userPortmanteau(userFirstWord, userCharacter) {
+    
+    // alert(`OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${character} characters of that word. Excellent choice!`);
+   document.getElementById('contenido').innerHTML= document.getElementById('contenido').innerHTML + `<p id= "builtPormanteau"> OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${userCharacter} characters of that word. Excellent choice! </p>`;
+}
+
+function recoverUserInLocalStorage(){
+    try{
+        userName = JSON.parse(localStorage.getItem("localUserName"));
+        return true;
+    }
+    catch{
+        console.log(`Hello, you're new here...`);
+        return false;
+    }
+}
+
+function saveUserInLocalStorage(){
+    localStorage.setItem("localUserName", JSON.stringify(userName));
+}
+
+
+// Main
+// Events added
+
+let userName = "";
+recoverUserInLocalStorage()
+if (userName !== null){
+    console.log("User found");
+    alert(`Welcome back, ${userName}!`)
+} else{
+    userName = prompt("Hi! My name is PT. What's your name?");
+    saveUserInLocalStorage();
+}
+
+
 
 identifyUser();
 // Object Array definition
@@ -51,14 +92,6 @@ for (let i=3;i>=0;i--){
     alert(`PORMANTEAU is live in ${i}!!`);
 }
 
-function userPortmanteau(userFirstWord, userCharacter) {
-    
-    // alert(`OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${character} characters of that word. Excellent choice!`);
-   document.getElementById('contenido').innerHTML= document.getElementById('contenido').innerHTML + `<p id= "builtPormanteau"> OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${userCharacter} characters of that word. Excellent choice! </p>`;
-}
-
-// Main
-// Events added
 
 document.getElementById('contenido').addEventListener("click", function(){
     alert(`${userName} just clicked!`)
