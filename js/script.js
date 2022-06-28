@@ -1,9 +1,53 @@
-let userName = prompt("Hi! My name is PT. What's your name?");
+//functions
+
+
 function identifyUser() { //Funcion sin parametros    
     // alert(`Hi, ${userName}! Welcome!`);
     document.getElementById('titulo').innerHTML="<h1>PORTMANTEAU Generator</h1>"+`<h3>Hi, ${userName}! Welcome!</h3>`;
    }
 
+
+
+function userPortmanteau(userFirstWord, userCharacter) {
+    
+    // alert(`OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${character} characters of that word. Excellent choice!`);
+   document.getElementById('contenido').innerHTML= document.getElementById('contenido').innerHTML + `<p id= "builtPormanteau"> OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${userCharacter} characters of that word. Excellent choice! </p>`;
+}
+
+function recoverUserInLocalStorage(){
+    // read from local if there is sth saved
+    try{
+        userName = JSON.parse(localStorage.getItem("localUserName"));
+        return true;
+    }
+    catch{
+        // if nothing is found then nullify userName
+        console.log(`Hello, you're new here...`);
+        userName = null;
+        return false;
+    }
+}
+// saving user name in local storage
+function saveUserInLocalStorage(){
+    localStorage.setItem("localUserName", JSON.stringify(userName));
+    localStorage.setItem("localPlayingCharacter", JSON.stringify(userPlayingCharacter));
+}
+
+
+
+// Main
+
+let userName = "";
+recoverUserInLocalStorage()
+if (userName !== null){
+    console.log("User found");
+    alert(`Welcome back, ${userName}!`)
+} else{
+    userName = prompt("Hi! My name is PT. What's your name?");
+}
+
+
+// Writes HTML with userName
 identifyUser();
 // Object Array definition
 const playingCharacters = [
@@ -20,13 +64,17 @@ document.getElementById('contenido').innerHTML=`<h3>Meet the characters in our g
 
 let userPlayingCharacter = prompt("Who do you want to play with today?");
 
+// now i have the user name and player name, then save
+saveUserInLocalStorage();
+
 let selectionInArray = playingCharacters.some((el) => el.name == userPlayingCharacter);
 
 if (selectionInArray != true){
     alert ("Playing Character doesn't exist");
 }
 else{
-    alert("Awesome!")
+    alert("Awesome!");
+    saveUserInLocalStorage();
 }
 // Portmanteau introduction
 let portmanteau = prompt ("Do you know what a PORTMANTEAU is? Please type Y or N");
@@ -51,14 +99,6 @@ for (let i=3;i>=0;i--){
     alert(`PORMANTEAU is live in ${i}!!`);
 }
 
-function userPortmanteau(userFirstWord, userCharacter) {
-    
-    // alert(`OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${character} characters of that word. Excellent choice!`);
-   document.getElementById('contenido').innerHTML= document.getElementById('contenido').innerHTML + `<p id= "builtPormanteau"> OK, ${userName}, you chose ${userFirstWord} as your first word in this PORTMANTEAU and you said you want us to build it using the last ${userCharacter} characters of that word. Excellent choice! </p>`;
-}
-
-// Main
-// Events added
 
 document.getElementById('contenido').addEventListener("click", function(){
     alert(`${userName} just clicked!`)
