@@ -69,13 +69,17 @@ saveUserInLocalStorage();
 
 let selectionInArray = playingCharacters.some((el) => el.name == userPlayingCharacter);
 
-if (selectionInArray != true){
+/*if (selectionInArray != true){
     alert ("Playing Character doesn't exist");
 }
 else{
     alert("Awesome!");
     saveUserInLocalStorage();
-}
+}*/
+
+//OPERADOR TERNARIO
+selectionInArray != true ? alert("Playing Character doesn't exist") : alert ('Awesome!')
+
 // Portmanteau introduction
 let portmanteau = prompt ("Do you know what a PORTMANTEAU is? Please type Y or N");
 
@@ -93,7 +97,6 @@ else{
     alert ("If you don't want to tell, you will find out soon enough...")
 }
 
-
 // Countdown
 for (let i=3;i>=0;i--){
     alert(`PORMANTEAU is live in ${i}!!`);
@@ -106,7 +109,20 @@ document.getElementById('contenido').addEventListener("click", function(){
 
 document.getElementById('seccionTercera').innerHTML="<h6>TO RESTART THE PORMANTEAU GENERATOR CLICK <b>\"HERE\"</b></h6>";
 document.getElementById('seccionTercera').addEventListener('click', function(){
-    document.location.reload(true);
+ //SWEET ALERT LIBRARY
+    Swal.fire({
+        title: 'Reload',
+        text: 'Are you sure you want to reload this page?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            document.location.reload(true);
+        }
+      }) ;
+   // document.location.reload(true);
 });
 
 let firstWord = prompt("Let's start building this PORTMANTEAU. What word would you like to use for the first part of this PORTMANTEAU?");
