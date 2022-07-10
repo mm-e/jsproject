@@ -8,7 +8,7 @@ function readJSON(url, timeOut=1000){//fetch
         throw new Error(`Can't read from ${url}`);
     })
     .then((responseJson) => {
-        playingCharacter = [...responseJson];
+        playingCharacters = [...responseJson];
     })
     .catch((error) => {
         setTimeout(() => {
