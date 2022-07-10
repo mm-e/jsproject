@@ -1,5 +1,23 @@
 //functions
 
+function readJSON(url, timeOut=1000){//fetch
+    fetch(url).then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error(`Can't read from ${url}`);
+    })
+    .then((responseJson) => {
+        playingCharacter = [...responseJson];
+    })
+    .catch((error) => {
+        setTimeout(() => {
+            console.log("ERROR can't read JSON");    
+        }, timeOut);
+        console.log(error)
+    });
+}
+
 
 function identifyUser() { //Funcion sin parametros    
     // alert(`Hi, ${userName}! Welcome!`);
@@ -50,12 +68,15 @@ if (userName !== null){
 // Writes HTML with userName
 identifyUser();
 // Object Array definition
-const playingCharacters = [
+/*const playingCharacters = [
     {name: "Purply", personality: "Laidback", superpower: "Chills the unchillable", photo:"../assets/****"}, //Need to add photo
     {name: "Oxno", personality: "Godlike", superpower: "All powerful", photo:"../assets/****"}, //Need to add photo
     {name: "Wolf", personality: "Cunning", superpower: "Knows the future", photo:"../assets/****"}, //Need to add photo
     {name: "Dodo", personality: "Outdoorsy", superpower: "Carefree", photo:"../assets/****"} //Need to add photo
-];
+];*/
+let playingCharacters = {};
+console.log(playingCharacters.name)
+readJSON("https://mm-e.github.io/jsproject/playingCharacter.json")
 
 // Object Array selection
 const introducePlayingCharacters = playingCharacters.map((el) => el.name);
