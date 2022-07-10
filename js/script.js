@@ -1,6 +1,6 @@
 //functions
 
-function readJSON(url, timeOut=1000){//fetch
+function readJSON(url, timeOut=2000){//fetch
     fetch(url).then((response) => {
         if (response.ok) {
             return response.json();
@@ -47,8 +47,13 @@ function recoverUserInLocalStorage(){
 }
 // saving user name in local storage
 function saveUserInLocalStorage(){
-    localStorage.setItem("localUserName", JSON.stringify(userName));
-    localStorage.setItem("localPlayingCharacter", JSON.stringify(userPlayingCharacter));
+    try {
+        localStorage.setItem("localUserName", JSON.stringify(userName));
+        localStorage.setItem("localPlayingCharacter", JSON.stringify(userPlayingCharacter));
+    }
+    catch {
+        console.log(`Gaw! trying to save failed?`)
+    }
 }
 
 
@@ -74,79 +79,84 @@ identifyUser();
     {name: "Wolf", personality: "Cunning", superpower: "Knows the future", photo:"../assets/****"}, //Need to add photo
     {name: "Dodo", personality: "Outdoorsy", superpower: "Carefree", photo:"../assets/****"} //Need to add photo
 ];*/
-let playingCharacters = {};
-console.log(playingCharacters.name)
-readJSON("https://mm-e.github.io/jsproject/playingCharacter.json")
+url="https://mm-e.github.io/jsproject/playingCharacter.json"
+let playingCharacters = [];
+//load players
+readJSON(url)
+setTimeout(() => {
 
-// Object Array selection
-const introducePlayingCharacters = playingCharacters.map((el) => el.name);
+    // Object Array selection
+    const introducePlayingCharacters = playingCharacters.map((el) => el.name);
 
-document.getElementById('contenido').innerHTML=`<h3>Meet the characters in our game. You will choose one to play with. Our carachters are ${introducePlayingCharacters}</h3>`;
 
-let userPlayingCharacter = prompt("Who do you want to play with today?");
+    document.getElementById('contenido').innerHTML=`<h3>Meet the characters in our game. You will choose one to play with. Our carachters are ${introducePlayingCharacters}</h3>`;
 
-// now i have the user name and player name, then save
-saveUserInLocalStorage();
+    let userPlayingCharacter = prompt("Who do you want to play with today?");
 
-let selectionInArray = playingCharacters.some((el) => el.name == userPlayingCharacter);
-
-/*if (selectionInArray != true){
-    alert ("Playing Character doesn't exist");
-}
-else{
-    alert("Awesome!");
+    // now i have the user name and player name, then save
     saveUserInLocalStorage();
-}*/
 
-//OPERADOR TERNARIO
-selectionInArray != true ? alert("Playing Character doesn't exist") : alert ('Awesome!')
+    let selectionInArray = playingCharacters.some((el) => el.name == userPlayingCharacter);
 
-// Portmanteau introduction
-let portmanteau = prompt ("Do you know what a PORTMANTEAU is? Please type Y or N");
+    /*if (selectionInArray != true){
+        alert ("Playing Character doesn't exist");
+    }
+    else{
+        alert("Awesome!");
+        saveUserInLocalStorage();
+    }*/
 
-if (portmanteau == "Y"){
-    alert ("Awesome! Then we are ready to get started!");
-}
+    //OPERADOR TERNARIO
+    selectionInArray != true ? alert("Playing Character doesn't exist") : alert ('Awesome!')
 
-else if (portmanteau == "N"){
-    // alert ("A PORTMANTEAU is a blend of words in which parts of multiple words are combined into a new word. Here we will blend the last letters of a word you will give us with the first same letters of a word we will find for you.");
-    let portmanteauDefinition = "A PORTMANTEAU is a blend of words in which parts of multiple words are combined into a new word. Here we will blend the last letters of a word you will give us with the first same letters of a word we will find for you.";
-    document.getElementById('titulo').innerHTML= document.getElementById('titulo').innerHTML + `<p = "dictionaryResult"> ${portmanteauDefinition} </p>`;
-}
+    // Portmanteau introduction
+    let portmanteau = prompt ("Do you know what a PORTMANTEAU is? Please type Y or N");
 
-else{
-    alert ("If you don't want to tell, you will find out soon enough...")
-}
+    if (portmanteau == "Y"){
+        alert ("Awesome! Then we are ready to get started!");
+    }
 
-// Countdown
-for (let i=3;i>=0;i--){
-    alert(`PORMANTEAU is live in ${i}!!`);
-}
+    else if (portmanteau == "N"){
+        // alert ("A PORTMANTEAU is a blend of words in which parts of multiple words are combined into a new word. Here we will blend the last letters of a word you will give us with the first same letters of a word we will find for you.");
+        let portmanteauDefinition = "A PORTMANTEAU is a blend of words in which parts of multiple words are combined into a new word. Here we will blend the last letters of a word you will give us with the first same letters of a word we will find for you.";
+        document.getElementById('titulo').innerHTML= document.getElementById('titulo').innerHTML + `<p = "dictionaryResult"> ${portmanteauDefinition} </p>`;
+    }
+
+    else{
+        alert ("If you don't want to tell, you will find out soon enough...")
+    }
+
+    // Countdown
+    for (let i=3;i>=0;i--){
+        alert(`PORMANTEAU is live in ${i}!!`);
+    }
 
 
-document.getElementById('contenido').addEventListener("click", function(){
-    alert(`${userName} just clicked!`)
-})
+    document.getElementById('contenido').addEventListener("click", function(){
+        alert(`${userName} just clicked!`)
+    })
 
-document.getElementById('seccionTercera').innerHTML="<h6>TO RESTART THE PORMANTEAU GENERATOR CLICK <b>\"HERE\"</b></h6>";
-document.getElementById('seccionTercera').addEventListener('click', function(){
- //SWEET ALERT LIBRARY
-    Swal.fire({
-        title: 'Reload',
-        text: 'Are you sure you want to reload this page?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No'
-      }).then((result) => {
-        if (result.isConfirmed) {
-            document.location.reload(true);
-        }
-      }) ;
-   // document.location.reload(true);
-});
+    document.getElementById('seccionTercera').innerHTML="<h6>TO RESTART THE PORMANTEAU GENERATOR CLICK <b>\"HERE\"</b></h6>";
+    document.getElementById('seccionTercera').addEventListener('click', function(){
+    //SWEET ALERT LIBRARY
+        Swal.fire({
+            title: 'Reload',
+            text: 'Are you sure you want to reload this page?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.location.reload(true);
+            }
+        }) ;
+    // document.location.reload(true);
+    });
 
-let firstWord = prompt("Let's start building this PORTMANTEAU. What word would you like to use for the first part of this PORTMANTEAU?");
-let character = prompt("Nice word! Now, how many charchters would you like the two words in your PORMTANTEAU to share?");
-   
-userPortmanteau (firstWord, character);
+    let firstWord = prompt("Let's start building this PORTMANTEAU. What word would you like to use for the first part of this PORTMANTEAU?");
+    let character = prompt("Nice word! Now, how many charchters would you like the two words in your PORMTANTEAU to share?");
+    
+    userPortmanteau (firstWord, character);
+        
+}, 1500);
